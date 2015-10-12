@@ -1,7 +1,3 @@
-#include <Security/Security.h>
-#include <Security/SecureTransport.h>
-%config(generator=MobileSubstrate);
-
 %hookf(void, SSLWrite, id context, const void *data, size_t dataLength, size_t *processed)
 {
 	NSError *error = nil;
@@ -38,8 +34,4 @@
                              error:&error];
     HBLogDebug(@"Success = %d, error = %@", success, error);
 	return %orig();
-}
-
-%ctor{
-	%init();
 }
